@@ -68,7 +68,7 @@ h1, h2, h3, h4, h5, .navbar-brand, .nav-link {
     align-items: center;
 }
 
-/* Clean Cards */
+
 .card {
     border: none;
     border-radius: 15px;
@@ -86,13 +86,13 @@ h1, h2, h3, h4, h5, .navbar-brand, .nav-link {
     object-fit: cover;
 }
 
-/* Customizing Bootstrap Elements */
+
 .bg-primary {
     background-color: var(--pacific-blue) !important;
 }
 
 .text-primary {
-    color: var(--sunset-warm) !important; /* Change SF text to Sunset color */
+    color: var(--sunset-warm) !important; /
 }
 
 hr {
@@ -100,14 +100,14 @@ hr {
     width: 60px;
 }
 
-/* Make the Star Rating look like a professional tag */
+
 .badge.bg-primary {
-    background-color: var(--sunset-warm) !important; /* Uses your Orange accent */
+    background-color: var(--sunset-warm) !important; 
     font-weight: 500;
     padding: 0.5em 0.8em;
 }
 
-/* Make the location titles stand out even more */
+
 .card-title {
     color: var(--deep-blue);
     margin-top: 10px;
@@ -115,13 +115,13 @@ hr {
     padding-bottom: 5px;
 }
 
-/* --- 1. Soft Texture & Background --- */
+
 body {
     background: radial-gradient(circle at top left, #FDFCF0 0%, #F8F9F5 100%);
     /* Subtle paper texture (optional) */
 }
 
-/* --- 2. The "Magazine" Card Look --- */
+
 .card {
     border-radius: 20px;
     background: #fff;
@@ -137,12 +137,12 @@ body {
 /* --- 3. Image Effects --- */
 .card-img-top {
     height: 250px;
-    clip-path: inset(10px round 15px); /* Creates a framed look inside the card */
+    clip-path: inset(10px round 15px); 
     transition: clip-path 0.4s ease;
 }
 
 .card:hover .card-img-top {
-    clip-path: inset(0px round 0px); /* Image expands to fill on hover */
+    clip-path: inset(0px round 0px); 
 }
 
 /* --- 4. Custom Badges & Icons --- */
@@ -155,20 +155,20 @@ body {
     box-shadow: 2px 4px 10px rgba(231, 111, 81, 0.2);
 }
 
-/* Initial state: Hidden and slightly lower */
+
 .card-wrapper {
     opacity: 0;
     transform: translateY(30px);
     transition: all 0.8s ease-out;
 }
 
-/* Final state: When the card scrolls into view */
+
 .card-wrapper.show-card {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Adding a "Glass" effect to the Hero text box */
+
 .hero-content {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
@@ -189,7 +189,7 @@ body {
 .card-img-top {
     height: 280px;
     object-fit: cover;
-    /* This makes the image look slightly inset like a photo frame */
+   
     padding: 12px;
     border-radius: 34px; 
 }
@@ -218,7 +218,7 @@ body {
 .detail-panel {
     position: fixed;
     top: 0;
-    right: -100%; /* Hidden off-screen */
+    right: -100%;
     width: 100%;
     height: 100vh;
     background: white;
@@ -227,7 +227,7 @@ body {
     box-shadow: -10px 0 30px rgba(0,0,0,0.1);
 }
 
-/* On screens wider than 992px, make it half-width */
+
 @media (min-width: 992px) {
     .detail-panel { width: 50%; }
 }
