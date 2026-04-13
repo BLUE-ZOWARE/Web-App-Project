@@ -1,297 +1,77 @@
-/* --- 1. Theme Variables & Reset --- */
 :root {
-    --deep-blue: #1D3557;      /* Deep Oceanic */
-    --pacific-blue: #457B9D;   /* Muted Blue */
-    --sunset-warm: #E76F51;    /* Sunset Orange Accents */
-    --sand-bg: #F8F9F5;        /* Warm Off-White Background */
+    --deep-blue: #1D3557;
+    --sunset-warm: #E76F51;
+    --sand-bg: #F8F9F5;
 }
 
 body {
-    font-family: 'Lato', sans-serif; /* Clean body text */
-    background-color: var(--sand-bg);
+    font-family: 'Lato', sans-serif;
+    background: radial-gradient(circle at top left, #FDFCF0 0%, var(--sand-bg) 100%);
     color: var(--deep-blue);
-    line-height: 1.6;
 }
 
-/* --- 2. Oswald Typography (Bigger & Cleaner) --- */
-h1, h2, h3, h4, h5, .navbar-brand, .nav-link {
+h1, h2, h3, h4, h5, .navbar-brand {
     font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
-    letter-spacing: 2px; /* Key for making Oswald look high-end */
+    letter-spacing: 2px;
 }
 
-.hero h1 {
-    font-size: 5rem; /* Large and punchy */
-    font-weight: 700;
-    text-shadow: 2px 2px 15px rgba(0,0,0,0.3);
-}
-
-.card-title {
-    font-size: 1.6rem;
-    letter-spacing: 1px;
-}
-
-/* --- 3. Component Styling --- */
-
-/* Navbar with a modern glass effect */
 .navbar {
     background-color: rgba(29, 53, 87, 0.95) !important;
-    backdrop-filter: blur(5px); /* Modern "clean" look */
-}
-
-/* Hero Section with Warm-Blue Gradient */
-.hero {
-    height: 65vh;
-    background: linear-gradient(rgba(231, 111, 81, 0.2), rgba(29, 53, 87, 0.8)), 
-                url('https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1600&q=80');
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
+    backdrop-filter: blur(5px);
 }
 
 .hero {
-    height: 80vh;
-    background-attachment: fixed; /* Parallax effect! The background stays still while you scroll */
-}
-
-.hero {
-    height: 90vh; /* Takes up almost the whole screen */
+    height: 60vh;
     background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
                 url('https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1600&q=80');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* This makes the image stay still while you scroll */
-    clip-path: ellipse(150% 100% at 50% 0%); /* Curved bottom edge for a designer feel */
     display: flex;
     justify-content: center;
     align-items: center;
+    clip-path: ellipse(150% 100% at 50% 0%);
 }
 
-
-.card {
+.accent-hr {
     border: none;
-    border-radius: 15px;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(29, 53, 87, 0.15) !important;
-}
-
-.card-img-top {
-    height: 220px;
-    object-fit: cover;
-}
-
-
-.bg-primary {
-    background-color: var(--pacific-blue) !important;
-}
-
-.text-primary {
-    color: var(--sunset-warm) !important; /
-}
-
-hr {
-    border-color: var(--sunset-warm) !important;
+    border-top: 3px solid var(--sunset-warm);
     width: 60px;
+    opacity: 1;
 }
-
-
-.badge.bg-primary {
-    background-color: var(--sunset-warm) !important; 
-    font-weight: 500;
-    padding: 0.5em 0.8em;
-}
-
-
-.card-title {
-    color: var(--deep-blue);
-    margin-top: 10px;
-    border-bottom: 2px solid rgba(231, 111, 81, 0.1);
-    padding-bottom: 5px;
-}
-
-
-body {
-    background: radial-gradient(circle at top left, #FDFCF0 0%, #F8F9F5 100%);
-    /* Subtle paper texture (optional) */
-}
-
 
 .card {
-    border-radius: 20px;
-    background: #fff;
-    border: 1px solid rgba(29, 53, 87, 0.05);
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border-radius: 15px;
+    border: 1px solid rgba(29, 53, 87, 0.08);
+    transition: transform 0.3s ease;
+    background: white;
 }
 
 .card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(231, 111, 81, 0.12) !important;
-}
-
-/* --- 3. Image Effects --- */
-.card-img-top {
-    height: 250px;
-    clip-path: inset(10px round 15px); 
-    transition: clip-path 0.4s ease;
-}
-
-.card:hover .card-img-top {
-    clip-path: inset(0px round 0px); 
-}
-
-/* --- 4. Custom Badges & Icons --- */
-.badge {
-    background-color: var(--sunset-warm) !important;
-    border-radius: 50px; /* Pill shape */
-    padding: 6px 15px;
-    font-weight: 500;
-    font-size: 0.75rem;
-    box-shadow: 2px 4px 10px rgba(231, 111, 81, 0.2);
-}
-
-
-.card-wrapper {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease-out;
-}
-
-
-.card-wrapper.show-card {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-
-.hero-content {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    padding: 40px;
-    border-radius: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    display: inline-block;
-}
-
-.card {
-    border-radius: 24px;
-    border: none;
-    background: #ffffff;
-    overflow: hidden;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
 }
 
 .card-img-top {
-    height: 280px;
+    height: 220px; /* Height for the cards */
     object-fit: cover;
-   
-    padding: 12px;
-    border-radius: 34px; 
+    padding: 8px;
+    border-radius: 20px;
 }
 
-.card-title {
-    font-family: 'Oswald', sans-serif;
-    color: var(--deep-blue);
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
-}
+.like-container { cursor: pointer; display: flex; align-items: center; }
+.like-heart { font-size: 1.2rem; }
+.text-danger { color: var(--sunset-warm) !important; }
 
-.btn-outline-dark {
-    border: 2px solid var(--deep-blue);
-    font-family: 'Oswald', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.3s;
-}
+#modalBio { white-space: pre-line; line-height: 1.6; }
 
-.btn-outline-dark:hover {
-    background-color: var(--sunset-warm);
-    border-color: var(--sunset-warm);
-    color: white;
-}
 
-.detail-panel {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 100%;
-    height: 100vh;
-    background: white;
-    z-index: 2000;
-    transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-    box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+html, body {
+    caret-color: transparent !important;
 }
 
 
-@media (min-width: 992px) {
-    .detail-panel { width: 50%; }
-}
-
-.detail-panel.active { right: 0; }
-
-.panel-content {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.panel-image {
-    height: 40%;
-    background-size: cover;
-    background-position: center;
-}
-
-.panel-info {
-    padding: 40px;
-    overflow-y: auto;
-}
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    opacity: 0;
-    visibility: hidden;
-    transition: 0.3s;
-    z-index: 1999;
-}
-
-.overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.close-btn {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    background: white;
-    border: none;
-    font-size: 2rem;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    z-index: 2001;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.clickable-img { cursor: pointer; transition: opacity 0.3s; }
-.clickable-img:hover { opacity: 0.9; }
-
-.collapse {
-    transition: all 0.35s ease;
-}
-
-.btn-link {
-    text-decoration: none;
-    font-size: 0.85rem;
-    letter-spacing: 0.5px;
+img, .card {
+    user-select: none;
+    -webkit-user-select: none;
 }
