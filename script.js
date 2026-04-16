@@ -55,7 +55,10 @@ function displayPlaces(records) {
     records.forEach(record => {
         const fields = record.fields;
         const id = record.id;
-        const likes = fields.Likes || 0;
+        
+        // FIX: Always use the number from Airtable first
+        const likes = fields.Likes || 0; 
+        
         const isLiked = localStorage.getItem(`liked-${id}`) ? 'text-danger' : 'text-muted';
         let imageUrl = (fields.Images && fields.Images.length > 0) ? fields.Images[0].url : 'https://via.placeholder.com/600x400';
 
@@ -99,32 +102,59 @@ function displayPlaces(records) {
 async function handleLike(recordId, currentLikes, element) {
     const heart = element.querySelector('.like-heart');
     const countDisplay = element.querySelector('.like-count');
+    
+    // Check if the user has already liked this item locally
     const alreadyLiked = localStorage.getItem(`liked-${recordId}`);
     
+    // Calculate new total
     let newLikes = alreadyLiked ? Math.max(0, currentLikes - 1) : currentLikes + 1;
 
+    // 1. Immediate UI Update (Make it feel fast)
     heart.classList.toggle('text-danger', !alreadyLiked);
     heart.classList.toggle('text-muted', alreadyLiked);
     countDisplay.innerText = newLikes;
     
-    if (alreadyLiked) localStorage.removeItem(`liked-${recordId}`);
-    else localStorage.setItem(`liked-${recordId}`, true);
+    if (alreadyLiked) {
+        localStorage.removeItem(`liked-${recordId}`);
+    } else {
+        localStorage.setItem(`liked-${recordId}`, true);
+    }
 
-    
+    // 2. Update local memory so sorting stays accurate
     const recIndex = allRecords.findIndex(r => r.id === recordId);
-    if(recIndex !== -1) allRecords[recIndex].fields.Likes = newLikes;
+    if(recIndex !== -1) {
+        allRecords[recIndex].fields.Likes = newLikes;
+    }
 
+    // 3. Sync with Airtable
     try {
-        await fetch(`${url}/${recordId}`, {
+        const response = await fetch(`${url}/${recordId}`, {
             method: 'PATCH',
             headers: {
                 'Authorization': `Bearer ${personalAccessToken}`,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ fields: { "Likes": newLikes } })
+            body: JSON.stringify({ 
+                fields: { 
+                    "Likes": Number(newLikes) // Ensure it is sent as a number
+                } 
+            })
         });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error("Airtable Error Details:", errorData);
+            throw new Error('Failed to update Airtable');
+        }
+
+        // Successfully synced! Update the onclick so further clicks use the new total
         element.setAttribute('onclick', `handleLike('${recordId}', ${newLikes}, this)`);
-    } catch (error) { console.error("Sync failed:", error); }
+        console.log(`Successfully updated ${recordId} to ${newLikes} likes.`);
+
+    } catch (error) {
+        console.error("Sync failed. Reverting UI...", error);
+        // Optional: Revert UI if sync fails so user doesn't see "fake" likes
+    }
 }
 
 function setupModalButtons() {
