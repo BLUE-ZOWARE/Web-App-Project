@@ -40,38 +40,177 @@ h1, h2, h3, h4, h5, .navbar-brand {
     opacity: 1;
 }
 
+/* --- 3. Professional Card Upgrades --- */
 .card {
-    border-radius: 15px;
-    border: 1px solid rgba(29, 53, 87, 0.08);
-    transition: transform 0.3s ease;
+    border-radius: 20px;
+    border: 1px solid rgba(29, 53, 87, 0.05);
+    /* "Ease-out" makes the movement feel heavy and expensive, not robotic */
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    overflow: hidden;
     background: white;
+    position: relative;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+    /* Subtle lift */
+    transform: translateY(-10px);
+    /* Large, soft "ambient" shadow */
+    box-shadow: 0 30px 60px rgba(29, 53, 87, 0.1) !important;
+}
+
+/* Container for the image to allow "Internal Zoom" */
+.position-relative {
+    overflow: hidden; /* This clips the image so it doesn't leak out when zooming */
+    border-radius: 20px 20px 0 0;
 }
 
 .card-img-top {
-    height: 220px; /* Height for the cards */
+    height: 250px;
     object-fit: cover;
-    padding: 8px;
-    border-radius: 20px;
+    padding: 0; /* Removed padding for a "Full-Bleed" edge-to-edge look */
+    transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.like-container { cursor: pointer; display: flex; align-items: center; }
-.like-heart { font-size: 1.2rem; }
-.text-danger { color: var(--sunset-warm) !important; }
-
-#modalBio { white-space: pre-line; line-height: 1.6; }
-
-
-html, body {
-    caret-color: transparent !important;
+.card:hover .card-img-top {
+    /* The "Cinematic Zoom" effect */
+    transform: scale(1.1);
 }
 
+/* --- 4. Button & Interaction Polish --- */
+.btn-outline-primary {
+    transition: all 0.3s ease;
+    border-width: 2px;
+}
 
-img, .card {
-    user-select: none;
-    -webkit-user-select: none;
+.btn-outline-primary:hover {
+    /* Subtle glow on the button itself */
+    box-shadow: 0 4px 15px rgba(69, 123, 157, 0.3);
+    transform: scale(1.02);
+}
+
+/* Smooth heart pop */
+.like-heart {
+    display: inline-block;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.like-container:active .like-heart {
+    transform: scale(1.5);
+}
+
+/* Change the cursor to the pointing hand for the like system */
+.like-container {
+    cursor: pointer !important;
+}
+
+/* Ensure the heart icon itself doesn't trigger the text cursor */
+.like-heart, .like-count {
+    pointer-events: none;
+}
+
+/* Make sure all buttons and interactive elements feel "clickable" */
+button, .btn, .nav-link, select, .like-container {
+    cursor: pointer !important;
+}
+
+/* --- High-Performance Symmetrical Wave --- */
+.wave-transition {
+    position: fixed;
+    top: 0;
+    left: -200%; 
+    width: 150%; 
+    height: 100vh;
+    /* Gradient flows: Foam -> Deep Water -> Foam */
+    background: linear-gradient(to right, #A8DADC 0%, #457B9D 20%, #1D3557 50%, #457B9D 80%, #A8DADC 100%);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: left 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 40px 0 100px rgba(0,0,0,0.6);
+    pointer-events: none;
+}
+
+/* THE LEADING WAVE (Visible when sliding in) */
+.wave-transition::after {
+    content: "";
+    position: absolute;
+    right: -145px; 
+    top: 0;
+    width: 150px;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 1000" preserveAspectRatio="none"><path d="M0 0 C 50 100 80 300 0 500 C 80 700 50 900 0 1000 L 0 1000 L 0 0 Z" fill="%23A8DADC"/></svg>');
+    background-size: 100% 100%;
+}
+
+/* THE TRAILING WAVE (Visible when sliding out) */
+.wave-transition::before {
+    content: "";
+    position: absolute;
+    left: -145px; /* Put this curve on the left side */
+    top: 0;
+    width: 150px;
+    height: 100%;
+    /* Mirrored SVG curve */
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 1000" preserveAspectRatio="none"><path d="M100 0 C 50 100 20 300 100 500 C 20 700 50 900 100 1000 L 100 1000 L 100 0 Z" fill="%23A8DADC"/></svg>');
+    background-size: 100% 100%;
+}
+
+.wave-transition.active {
+    left: 0 !important;
+    pointer-events: all;
+}
+
+/* Ensure the content is perfectly centered and invisible initially */
+.transition-content {
+    opacity: 0;
+    transform: translateY(20px); /* Starts slightly lower for a "rise" effect */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none;
+    z-index: 10001;
+}
+
+/* Only shows up when the wave is fully active */
+.wave-transition.active .transition-content {
+    opacity: 1;
+    transform: translateY(0); /* Rises into place */
+    transition-delay: 0.4s; /* Waits for the wave to cover the screen first */
+}
+
+/* Match the standard Nav Link style */
+.nav-custom-link {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.6) !important; /* Matches the greyish "Explore Places" */
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    display: inline-block;
+}
+
+/* The Blue Glow Hover Effect */
+.nav-custom-link:hover {
+    color: #00d4ff !important; /* Bright blue */
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.7), 
+                 0 0 20px rgba(0, 212, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Centers the modal and adds a backdrop blur */
+.modal-backdrop {
+    background-color: rgba(29, 53, 87, 0.4) !important;
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    background: white;
+    border: none;
+    /* This ensures it pops out against your sand-colored background */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+/* Ensure the modal is always above the wave overlay just in case */
+#infoModal {
+    z-index: 1055; 
 }

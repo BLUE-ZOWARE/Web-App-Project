@@ -13,9 +13,13 @@
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-        <div class="container-fluid px-5"> <a class="navbar-brand fw-bold" href="#">EMBARCADERO <span class="text-primary">SF</span></a>
+        <div class="container-fluid px-5"> 
+            <a class="navbar-brand fw-bold" href="index.html">EMBARCADERO <span class="text-primary">SF</span></a>
             <div class="navbar-nav ms-auto">
                 <a class="nav-link" href="#catalog">Explore Places</a>
+                <a href="javascript:void(0)" onclick="navigateWithWave('spot.html')" class="nav-custom-link">
+    Dedicated View
+</a>
             </div>
         </div>
     </nav>
@@ -51,25 +55,33 @@
     </main>
 
     <footer class="bg-light py-4 text-center border-top">
-        <p class="text-muted small">SF Embarcadero Guide &copy; 2026</p>
+        <p class="text-muted small"> &copy; 2026 Daniel Mendoza. All rights reserved.</p>
     </footer>
 
-    <div class="modal fade" id="infoModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0 shadow-lg">
-                <div class="modal-header border-0 pb-0">
-                    <h4 class="modal-title fw-bold text-uppercase" id="modalTitle"></h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body pt-2">
-                    <p id="modalBio"></p>
-                    <div id="modalDetails" class="mt-3"></div>
-                </div>
-            </div>
+    <div id="wave-overlay" class="wave-transition">
+        <div class="text-center">
+            <h2 class="text-white Oswald display-4">SURFING TO VIEW...</h2>
         </div>
     </div>
 
+   <div class="modal fade" id="infoModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"> 
+    <div class="modal-content border-0 shadow-lg" style="border-radius: 25px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p id="modalBio"></p>
+        <div id="modalDetails"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
