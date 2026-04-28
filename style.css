@@ -1,7 +1,9 @@
+/* --- 1. CORE VARIABLES & BASE --- */
 :root {
     --deep-blue: #1D3557;
     --sunset-warm: #E76F51;
     --sand-bg: #F8F9F5;
+    --wave-grad: linear-gradient(to right, #A8DADC 0%, #457B9D 20%, #1D3557 50%, #457B9D 80%, #A8DADC 100%);
 }
 
 body {
@@ -10,207 +12,209 @@ body {
     color: var(--deep-blue);
 }
 
-h1, h2, h3, h4, h5, .navbar-brand {
+h1, h2, h3, h4, h5, .navbar-brand, .Oswald {
     font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
 
-.navbar {
-    background-color: rgba(29, 53, 87, 0.95) !important;
-    backdrop-filter: blur(5px);
+img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: high-quality;
+    -ms-interpolation-mode: bicubic;
+}
+
+/* --- 2. LAYOUT COMPONENTS --- */
+.navbar { 
+    background: rgba(29, 53, 87, 0.95) !important; 
+    backdrop-filter: blur(5px); 
 }
 
 .hero {
     height: 60vh;
     background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
-                url('https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1600&q=80');
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    justify-content: center;
+                url('https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1600&q=80') center/cover;
+    display: flex; 
+    justify-content: center; 
     align-items: center;
     clip-path: ellipse(150% 100% at 50% 0%);
 }
 
-.accent-hr {
-    border: none;
-    border-top: 3px solid var(--sunset-warm);
-    width: 60px;
-    opacity: 1;
+.accent-hr { 
+    border: none; 
+    border-top: 3px solid var(--sunset-warm); 
+    width: 60px; 
+    opacity: 1; 
 }
 
-/* --- 3. Professional Card Upgrades --- */
+/* --- 3. CARDS & GALLERY --- */
 .card {
-    border-radius: 20px;
+    border-radius: 20px; 
     border: 1px solid rgba(29, 53, 87, 0.05);
-    /* "Ease-out" makes the movement feel heavy and expensive, not robotic */
     transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-    overflow: hidden;
-    background: white;
+    overflow: hidden; 
+    background: white; 
     position: relative;
 }
 
-.card:hover {
-    /* Subtle lift */
-    transform: translateY(-10px);
-    /* Large, soft "ambient" shadow */
-    box-shadow: 0 30px 60px rgba(29, 53, 87, 0.1) !important;
+.card:hover { 
+    transform: translateY(-10px); 
+    box-shadow: 0 30px 60px rgba(29, 53, 87, 0.1) !important; 
 }
 
-/* Container for the image to allow "Internal Zoom" */
-.position-relative {
-    overflow: hidden; /* This clips the image so it doesn't leak out when zooming */
-    border-radius: 20px 20px 0 0;
+.position-relative.overflow-hidden, 
+.card-img-top { 
+    border-radius: 20px 20px 0 0; 
 }
 
 .card-img-top {
-    height: 250px;
+    height: 250px; 
     object-fit: cover;
-    padding: 0; /* Removed padding for a "Full-Bleed" edge-to-edge look */
     transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.card:hover .card-img-top {
-    /* The "Cinematic Zoom" effect */
-    transform: scale(1.1);
+.card:hover .card-img-top { transform: scale(1.1); }
+
+/* --- 4. BUTTONS & INTERACTION --- */
+button, .btn, .nav-link, select, .like-container { cursor: pointer !important; }
+
+
+.btn-explore-red {
+    border: 2px solid #dc3545 !important; 
+    color: #dc3545 !important;
+    font-weight: bold; 
+    transition: 0.3s;
+}
+.btn-explore-red:hover { 
+    background: #dc3545 !important; 
+    color: white !important; 
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4); 
 }
 
-/* --- 4. Button & Interaction Polish --- */
-.btn-outline-primary {
-    transition: all 0.3s ease;
-    border-width: 2px;
+
+.btn-dedicated-blue { 
+    background: #007bff; 
+    color: white; 
+    border: none; 
+    transition: 0.3s; 
 }
 
-.btn-outline-primary:hover {
-    /* Subtle glow on the button itself */
-    box-shadow: 0 4px 15px rgba(69, 123, 157, 0.3);
-    transform: scale(1.02);
+.btn-dedicated-blue:hover {
+    background-color: #007bff !important; 
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+    filter: brightness(1) !important;
+    color: white !important;
+    transform: translateY(-1px);
 }
 
-/* Smooth heart pop */
-.like-heart {
-    display: inline-block;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.btn-dedicated-blue:active {
+    background-color: #007bff !important;
+    transform: translateY(0);
 }
 
-.like-container:active .like-heart {
-    transform: scale(1.5);
+/* Nav Links */
+.nav-custom-link {
+    font-family: 'Oswald', sans-serif; 
+    text-transform: uppercase; 
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.6) !important; 
+    text-decoration: none;
+    padding: 0.5rem 1rem; 
+    transition: 0.3s;
+}
+.nav-custom-link:hover { 
+    color: #00d4ff !important; 
+    text-shadow: 0 0 10px #00d4ff; 
+    transform: translateY(-2px); 
 }
 
-/* Change the cursor to the pointing hand for the like system */
-.like-container {
-    cursor: pointer !important;
+/* Like Heart */
+.like-heart { 
+    display: inline-block; 
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+    pointer-events: none; 
 }
+.like-container:active .like-heart { transform: scale(1.5); }
 
-/* Ensure the heart icon itself doesn't trigger the text cursor */
-.like-heart, .like-count {
-    pointer-events: none;
-}
-
-/* Make sure all buttons and interactive elements feel "clickable" */
-button, .btn, .nav-link, select, .like-container {
-    cursor: pointer !important;
-}
-
-/* --- High-Performance Symmetrical Wave --- */
+/* --- 5. WAVE TRANSITION --- */
 .wave-transition {
-    position: fixed;
-    top: 0;
-    left: -200%; 
-    width: 150%; 
-    height: 100vh;
-    /* Gradient flows: Foam -> Deep Water -> Foam */
-    background: linear-gradient(to right, #A8DADC 0%, #457B9D 20%, #1D3557 50%, #457B9D 80%, #A8DADC 100%);
+    position: fixed; top: 0; left: -200%; width: 150%; height: 100vh;
+    background: var(--wave-grad); 
     z-index: 10000;
-    display: flex;
-    justify-content: center;
+    display: flex; 
+    justify-content: center; 
     align-items: center;
     transition: left 1.4s cubic-bezier(0.22, 1, 0.36, 1);
-    box-shadow: 40px 0 100px rgba(0,0,0,0.6);
+    box-shadow: 40px 0 100px rgba(0,0,0,0.6); 
     pointer-events: none;
 }
 
-/* THE LEADING WAVE (Visible when sliding in) */
-.wave-transition::after {
-    content: "";
-    position: absolute;
-    right: -145px; 
-    top: 0;
-    width: 150px;
-    height: 100%;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 1000" preserveAspectRatio="none"><path d="M0 0 C 50 100 80 300 0 500 C 80 700 50 900 0 1000 L 0 1000 L 0 0 Z" fill="%23A8DADC"/></svg>');
-    background-size: 100% 100%;
-}
-
-/* THE TRAILING WAVE (Visible when sliding out) */
+.wave-transition::after, 
 .wave-transition::before {
-    content: "";
-    position: absolute;
-    left: -145px; /* Put this curve on the left side */
-    top: 0;
-    width: 150px;
-    height: 100%;
-    /* Mirrored SVG curve */
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 1000" preserveAspectRatio="none"><path d="M100 0 C 50 100 20 300 100 500 C 20 700 50 900 100 1000 L 100 1000 L 100 0 Z" fill="%23A8DADC"/></svg>');
-    background-size: 100% 100%;
+    content: ""; position: absolute; top: 0; width: 150px; height: 100%; background-size: 100% 100%;
+}
+.wave-transition::after { 
+    right: -145px; 
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 1000" preserveAspectRatio="none"><path d="M0 0 C 50 100 80 300 0 500 C 80 700 50 900 0 1000 L 0 1000 L 0 0 Z" fill="%23A8DADC"/></svg>'); 
+}
+.wave-transition::before { 
+    left: -145px; 
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 1000" preserveAspectRatio="none"><path d="M100 0 C 50 100 20 300 100 500 C 20 700 50 900 100 1000 L 100 1000 L 100 0 Z" fill="%23A8DADC"/></svg>'); 
 }
 
-.wave-transition.active {
-    left: 0 !important;
-    pointer-events: all;
+.wave-transition.active { left: 0 !important; pointer-events: all; }
+
+.transition-content { 
+    opacity: 0; 
+    transform: translateY(20px); 
+    transition: 0.5s; 
+    pointer-events: none; 
+    z-index: 10001; 
+}
+.wave-transition.active .transition-content { 
+    opacity: 1; 
+    transform: translateY(0); 
+    transition-delay: 0.4s; 
 }
 
-/* Ensure the content is perfectly centered and invisible initially */
-.transition-content {
-    opacity: 0;
-    transform: translateY(20px); /* Starts slightly lower for a "rise" effect */
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    pointer-events: none;
-    z-index: 10001;
+/* --- 6. DEDICATED VIEW & MODALS --- */
+#main-slide-container { 
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease; 
 }
+#info-section { transition: background-color 0.8s ease; }
 
-/* Only shows up when the wave is fully active */
-.wave-transition.active .transition-content {
-    opacity: 1;
-    transform: translateY(0); /* Rises into place */
-    transition-delay: 0.4s; /* Waits for the wave to cover the screen first */
-}
 
-/* Match the standard Nav Link style */
-.nav-custom-link {
-    font-family: 'Oswald', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: rgba(255, 255, 255, 0.6) !important; /* Matches the greyish "Explore Places" */
+.nav-arrow {
+    position: fixed; top: 50%; transform: translateY(-50%);
+    z-index: 100; color: white;
+    background: rgba(29, 53, 87, 0.4) !important; 
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex; align-items: center; justify-content: center;
+    width: 50px; height: 80px; padding: 0;
     text-decoration: none;
-    transition: all 0.3s ease;
-    padding: 0.5rem 1rem;
-    display: inline-block;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* The Blue Glow Hover Effect */
-.nav-custom-link:hover {
-    color: #00d4ff !important; /* Bright blue */
-    text-shadow: 0 0 10px rgba(0, 212, 255, 0.7), 
-                 0 0 20px rgba(0, 212, 255, 0.4);
-    transform: translateY(-2px);
+.left-arrow { left: 0; border-radius: 0 15px 15px 0; }
+.right-arrow { right: 0; border-radius: 15px 0 0 15px; }
+
+.nav-arrow:hover {
+    background: var(--deep-blue) !important;
+    width: 60px;
+    color: #00d4ff !important;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
 }
 
-/* Centers the modal and adds a backdrop blur */
-.modal-backdrop {
-    background-color: rgba(29, 53, 87, 0.4) !important;
-    backdrop-filter: blur(4px);
-}
+.nav-arrow svg { width: 24px; height: auto; display: block; }
 
-.modal-content {
-    background: white;
-    border: none;
-    /* This ensures it pops out against your sand-colored background */
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+/* Modals */
+.modal-backdrop { 
+    background-color: rgba(29, 53, 87, 0.4) !important; 
+    backdrop-filter: blur(4px); 
 }
-
-/* Ensure the modal is always above the wave overlay just in case */
-#infoModal {
-    z-index: 1055; 
+.modal-content { 
+    border-radius: 25px; 
+    border: none; 
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2); 
 }
