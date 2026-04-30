@@ -8,7 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-dark overflow-hidden">
+<!-- Removed overflow-hidden to allow scrolling on small laptops/phones -->
+<body class="bg-dark">
 
     <div id="wave-overlay" class="wave-transition">
         <div class="text-center transition-content">
@@ -17,58 +18,62 @@
         </div>
     </div>
 
-    <div id="spot-wrapper" class="vw-100 vh-100 position-relative">
-     <a href="javascript:void(0)" onclick="changeSpot(-1)" class="nav-arrow left-arrow" title="Previous">
-    <svg width="40px" height="80px" viewBox="0 0 100 100" style="margin-left: 20px;">
-        <path d="M70,10 L30,50 L70,90" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-</a>
-
-<a href="javascript:void(0)" onclick="changeSpot(1)" class="nav-arrow right-arrow" title="Next">
-    <svg width="40px" height="80px" viewBox="0 0 100 100" style="margin-right: 20px;">
-        <path d="M30,10 L70,50 L30,90" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-</a>
+    <div id="spot-wrapper" class="container-fluid p-0">
+        <!-- Back Button -->
         <a href="index.html" class="btn btn-outline-light rounded-pill position-absolute top-0 start-0 m-4 shadow-sm" style="z-index: 1000; letter-spacing: 1px; font-size: 0.8rem;">
-            ← BACK TO EXPLORE
+            &larr; BACK TO EXPLORE
         </a>
 
-        <div id="main-slide-container" class="row g-0 h-100 w-100">
-            <div class="col-md-7 h-100">
-                <div id="spot-image" class="h-100 w-100" style="background-size: cover; background-position: center;">
-                    <span id="spot-stars" class="badge bg-danger position-absolute top-0 end-0 m-4 p-2 shadow-lg Oswald" style="font-size: 1.2rem; z-index: 5;">
-                        </span>
+        <!-- Nav Arrows -->
+        <a href="javascript:void(0)" onclick="changeSpot(-1)" class="nav-arrow left-arrow" title="Previous">
+            <svg width="30px" height="60px" viewBox="0 0 100 100">
+                <path d="M70,10 L30,50 L70,90" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </a>
+
+        <a href="javascript:void(0)" onclick="changeSpot(1)" class="nav-arrow right-arrow" title="Next">
+            <svg width="30px" height="60px" viewBox="0 0 100 100">
+                <path d="M30,10 L70,50 L30,90" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </a>
+
+        <div id="main-slide-container" class="row g-0 min-vh-100">
+            
+            <div class="col-lg-7 col-12 position-relative">
+                <div id="spot-image" class="dedicated-image">
+                    <span id="spot-stars" class="badge bg-danger position-absolute top-0 end-0 m-4 p-2 shadow-lg Oswald" style="font-size: 1.2rem; z-index: 5;"></span>
                 </div>
             </div>
 
-            <div id="info-section" class="col-md-5 h-100 p-5 d-flex flex-column justify-content-center text-white">
-                <h1 id="spot-title" class="display-3 Oswald mb-2"></h1>
+           
+            <div id="info-section" class="col-lg-5 col-12 p-4 p-md-5 d-flex flex-column justify-content-center text-white">
+                <h1 id="spot-title" class="display-4 Oswald mb-2"></h1>
                 <hr class="accent-hr ms-0 mb-4" style="border-top-color: white !important; opacity: 1;">
                 
-                <p id="spot-description" class="lead mb-4" style="font-weight: 300; line-height: 1.8;"></p>
+                <p id="spot-description" class="lead mb-4" style="font-weight: 300; line-height: 1.6;"></p>
                 
                 <div class="spot-meta mb-4">
                     <div class="row g-3">
                         <div class="col-6">
                             <p class="mb-1 small opacity-75">📍 LOCATION</p>
-                            <p id="spot-addr" class="fw-bold"></p>
+                            <p id="spot-addr" class="fw-bold mb-0 small"></p>
                         </div>
                         <div class="col-6">
                             <p class="mb-1 small opacity-75">🕒 HOURS</p>
-                            <p id="spot-hours" class="fw-bold"></p>
+                            <p id="spot-hours" class="fw-bold mb-0 small"></p>
                         </div>
                         <div class="col-6">
                             <p class="mb-1 small opacity-75">🍔 FOOD AVAILABLE</p>
-                            <p id="spot-food" class="fw-bold"></p>
+                            <p id="spot-food" class="fw-bold mb-0 small"></p>
                         </div>
                         <div class="col-6">
                             <p class="mb-1 small opacity-75">🎡 MAIN ATTRACTION</p>
-                            <p id="spot-attr" class="fw-bold"></p>
+                            <p id="spot-attr" class="fw-bold mb-0 small"></p>
                         </div>
                     </div>
                 </div>
 
-                <div id="mini-map-container" class="rounded-4 overflow-hidden shadow-lg mb-4" style="height: 180px; border: 1px solid rgba(255,255,255,0.1);">
+                <div id="mini-map-container" class="rounded-4 overflow-hidden shadow-lg mb-4" style="height: 150px; border: 1px solid rgba(255,255,255,0.1);">
                     <iframe id="spot-map" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen src=""></iframe>
                 </div>
 

@@ -173,4 +173,76 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+/* --- FIXED LIKE SYSTEM --- */
+async function handleLike(recordId, currentLikes, element) {
+    const heart = element.querySelector('.like-heart');
+    const countSpan = element.querySelector('.like-count');
+    
+    // 1. Check current status from localStorage
+    const hasLiked = localStorage.getItem(`liked-${recordId}`) === 'true';
+    
+    
+    let newLikes;
+    if (!hasLiked) {
+        
+        newLikes = currentLikes + 1;
+        heart.classList.replace('text-muted', 'text-danger');
+        localStorage.setItem(`liked-${recordId}`, 'true');
+    } else {
+      
+        newLikes = Math.max(0, currentLikes - 1); // Ensures it never goes below 0
+        heart.classList.replace('text-danger', 'text-muted');
+        localStorage.removeItem(`liked-${recordId}`);
+    }
+
+   
+    countSpan.innerText = newLikes;
+    heart.style.transform = 'scale(1.4)';
+    setTimeout(() => heart.style.transform = 'scale(1)', 200);
+
+  
+    element.setAttribute('onclick', `handleLike('${recordId}', ${newLikes}, this)`);
+
+    // 5. Sync with Airtable
+    try {
+        await fetch(`${url}/${recordId}`, {
+            method: 'PATCH',
+            headers: {
+                'Authorization': `Bearer ${personalAccessToken}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                fields: { "Likes": newLikes }
+            })
+        });
+    } catch (error) {
+        console.error("Airtable sync error:", error);
+    }
+}
+
+/* --- SORTING LOGIC --- */
+function handleSort() {
+    const sortValue = document.getElementById('sortSelect').value;
+    
+   
+    let sortedRecords = [...allRecords];
+
+    if (sortValue === 'most-liked') {
+        sortedRecords.sort((a, b) => {
+            const likesA = a.fields.Likes || 0;
+            const likesB = b.fields.Likes || 0;
+            return likesB - likesA; // High to Low
+        });
+    } else if (sortValue === 'least-liked') {
+        sortedRecords.sort((a, b) => {
+            const likesA = a.fields.Likes || 0;
+            const likesB = b.fields.Likes || 0;
+            return likesA - likesB; // Low to High
+        });
+    }
+
+    displayPlaces(sortedRecords);
+}
+
+
 fetchPlaces();
